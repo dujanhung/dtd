@@ -1,6 +1,6 @@
 <!ENTITY % abstract.container.drawable '(g|line|polyline|polygon|path|rect|circle|ellipse|use)*'>
 <!ENTITY % abstract.container.animation '(animate|animateTransform)*'>
-<!ENTITY % abstract.container.group '(%abstract.container.drawable;,%abstract.container.animation;)'>
+<!ENTITY % abstract.container.group '(%abstract.container.drawable;|%abstract.container.animation;)*'>
 <!ENTITY % abstract.container.pcdata '(#PCDATA)*'>
 <!ENTITY % abstract.container.empty 'EMPTY'>
 <!ENTITY % abstract.global.attr.id 'id CDATA #IMPLIED'>
