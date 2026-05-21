@@ -34,7 +34,6 @@
 <!ENTITY % abstract.drawable.attr.stroke-linejoin 'stroke-linejoin %abstract.drawable.enum.stroke-linejoin; #IMPLIED'>
 <!ENTITY % abstract.drawable.attrs '%abstract.drawable.attr.opacity; %abstract.drawable.attr.fill; %abstract.drawable.attr.stroke; %abstract.drawable.attr.stroke-width; %abstract.drawable.attr.stroke-miterlimit; %abstract.drawable.attr.stroke-linecap; %abstract.drawable.attr.stroke-linejoin;'>
 <!ENTITY % abstract.animation.const.indefinite 'indefinite'>
-<!ENTITY % abstract.animation.enum.type 'matrix|translate|rotate|scale|skewX|skewY'>
 <!ENTITY % abstract.animation.attr.dur 'dur CDATA #REQUIRED'>
 <!ENTITY % abstract.animation.attr.repeatCount 'repeatCount (%abstract.animation.const.indefinite;) #REQUIRED'>
 <!ENTITY % abstract.animation.attr.values 'values CDATA #REQUIRED'>
@@ -65,13 +64,15 @@
 <!ENTITY % animate.container '%abstract.container.empty;'>
 <!ENTITY % animate.enum.attributeName 'opacity|fill|stroke|stroke-with|stroke-linecap|stroke-linejoin|stroke-miterlimit'>
 <!ENTITY % animate.attr.attributeName 'attributeName (%animate.enum.attributeName;) #REQUIRED'>
-<!ENTITY % animate.attrs ' %abstract.animation.attrs; %abstract.global.attrs;'>
+<!ENTITY % animate.attrs '%animate.attr.attributeName; %abstract.animation.attrs; %abstract.global.attrs;'>
 <!ELEMENT animate %animate.container;>
 <!ATTLIST animate %animate.attrs;>
 <!ENTITY % animateTransform.container '%abstract.container.empty;'>
-<!ENTITY % animateTransform.const.transform 'transform'>
-<!ENTITY % animateTransform.attr.attributeName 'attributeName (%animateTransform.const.transform;) #REQUIRED'>
-<!ENTITY % animateTransform.attrs '%animateTransform.attr.attributeName; %abstract.animation.attrs; %abstract.global.attrs;'>
+<!ENTITY % animateTransform.const.attributeName '(transform)'>
+<!ENTITY % animateTransform.enum.type '(matrix|translate|rotate|scale|skewX|skewY)'>
+<!ENTITY % animateTransform.attr.attributeName 'attributeName %animateTransform.const.attributeName; #REQUIRED'>
+<!ENTITY % animateTransform.attr.type 'type %animateTransform.enum.type; #REQUIRED'>
+<!ENTITY % animateTransform.attrs '%animateTransform.attr.attributeName; %animateTransform.attr.type; %abstract.animation.attrs; %abstract.global.attrs;'>
 <!ELEMENT animateTransform %animateTransform.container;>
 <!ATTLIST animateTransform %animateTransform.attrs;>
 <!ENTITY % svg.container '((title)?,(desc)?,(script)?,(style)?,(defs)?,%abstract.container.drawable;)'>
