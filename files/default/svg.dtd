@@ -39,7 +39,7 @@
 <!ENTITY % abstract.animation.attrs '%abstract.animation.attr.dur; %abstract.animation.attr.repeatCount; %abstract.animation.attr.values;'>
 <!ENTITY % title.container '(#PCDATA)*'>
 <!ELEMENT title %title.container;>
-<!ENTITY % desc.container '%abstract.container.pcdata;'>
+<!ENTITY % desc.container '(#PCDATA)*'>
 <!ELEMENT desc %desc.container;>
 <!ENTITY % script.container '(#PCDATA)*'>
 <!ENTITY % script.enum.lang 'JS|PY'>
