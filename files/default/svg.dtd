@@ -1,8 +1,6 @@
 <!ENTITY % abstract.container.drawable '(g|line|polyline|polygon|path|rect|circle|ellipse|use)*'>
 <!ENTITY % abstract.container.animation '(animate|animateTransform)*'>
 <!ENTITY % abstract.container.group '(%abstract.container.drawable;|%abstract.container.animation;)*'>
-<!ENTITY % abstract.container.pcdata '(#PCDATA)*'>
-<!ENTITY % abstract.container.empty 'EMPTY'>
 <!ENTITY % abstract.global.attr.id 'id CDATA #IMPLIED'>
 <!ENTITY % abstract.global.attr.class 'class CDATA #IMPLIED'>
 <!ENTITY % abstract.global.attr.style 'style CDATA #IMPLIED'>
@@ -33,22 +31,23 @@
 <!ENTITY % abstract.drawable.attr.stroke-linecap 'stroke-linecap %abstract.drawable.enum.stroke-linecap; #IMPLIED'>
 <!ENTITY % abstract.drawable.attr.stroke-linejoin 'stroke-linejoin %abstract.drawable.enum.stroke-linejoin; #IMPLIED'>
 <!ENTITY % abstract.drawable.attrs '%abstract.drawable.attr.opacity; %abstract.drawable.attr.fill; %abstract.drawable.attr.stroke; %abstract.drawable.attr.stroke-width; %abstract.drawable.attr.stroke-miterlimit; %abstract.drawable.attr.stroke-linecap; %abstract.drawable.attr.stroke-linejoin;'>
+<!ENTITY % abstract.perc.attrs '%abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
 <!ENTITY % abstract.animation.const.indefinite 'indefinite'>
 <!ENTITY % abstract.animation.attr.dur 'dur CDATA #REQUIRED'>
 <!ENTITY % abstract.animation.attr.repeatCount 'repeatCount (%abstract.animation.const.indefinite;) #REQUIRED'>
 <!ENTITY % abstract.animation.attr.values 'values CDATA #REQUIRED'>
 <!ENTITY % abstract.animation.attrs '%abstract.animation.attr.dur; %abstract.animation.attr.repeatCount; %abstract.animation.attr.values;'>
-<!ENTITY % title.container '%abstract.container.pcdata;'>
+<!ENTITY % title.container '(#PCDATA)*'>
 <!ELEMENT title %title.container;>
 <!ENTITY % desc.container '%abstract.container.pcdata;'>
 <!ELEMENT desc %desc.container;>
-<!ENTITY % script.container '%abstract.container.pcdata;'>
+<!ENTITY % script.container '(#PCDATA)*'>
 <!ENTITY % script.enum.lang 'JS|PY'>
 <!ENTITY % script.attr.lang 'lang (%script.enum.lang;) #REQUIRED'>
 <!ENTITY % script.attrs '%script.attr.lang;'>
 <!ELEMENT script %script.container;>
 <!ATTLIST script %script.attrs;>
-<!ENTITY % style.container '%abstract.container.pcdata;'>
+<!ENTITY % style.container '(#PCDATA)*'>
 <!ENTITY % style.enum.lang 'CSS|JSON'>
 <!ENTITY % style.attr.lang 'lang (%style.enum.lang;) #REQUIRED'>
 <!ENTITY % style.attrs '%style.attr.lang;'>
@@ -58,16 +57,20 @@
 <!ELEMENT defs %defs.container;>
 <!ENTITY % use.container '%abstract.container.animation;'>
 <!ENTITY % use.attr.href 'href CDATA #REQUIRED'>
-<!ENTITY % use.attrs '%use.attr.href; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % use.attrs '%use.attr.href; %abstract.perc.attrs;'>
 <!ELEMENT use %use.container;>
 <!ATTLIST use %use.attrs;>
-<!ENTITY % animate.container '%abstract.container.empty;'>
+<!ENTITY % g.container '((title)?,(desc)?,%abstract.container.group;)'>
+<!ENTITY % g.attrs '%abstract.perc.attrs;'>
+<!ELEMENT g %g.container;>
+<!ATTLIST g %g.attrs;>
+<!ENTITY % animate.container 'EMPTY'>
 <!ENTITY % animate.enum.attributeName 'opacity|fill|stroke|stroke-with|stroke-linecap|stroke-linejoin|stroke-miterlimit'>
 <!ENTITY % animate.attr.attributeName 'attributeName (%animate.enum.attributeName;) #REQUIRED'>
 <!ENTITY % animate.attrs '%animate.attr.attributeName; %abstract.animation.attrs; %abstract.global.attrs;'>
 <!ELEMENT animate %animate.container;>
 <!ATTLIST animate %animate.attrs;>
-<!ENTITY % animateTransform.container '%abstract.container.empty;'>
+<!ENTITY % animateTransform.container 'EMPTY'>
 <!ENTITY % animateTransform.const.attributeName '(transform)'>
 <!ENTITY % animateTransform.enum.type '(matrix|translate|rotate|scale|skewX|skewY)'>
 <!ENTITY % animateTransform.attr.attributeName 'attributeName %animateTransform.const.attributeName; #REQUIRED'>
@@ -78,47 +81,43 @@
 <!ENTITY % svg.container '((title)?,(desc)?,(script)?,(style)?,(defs)?,%abstract.container.drawable;)'>
 <!ENTITY % svg.attr.width 'width CDATA #REQUIRED'>
 <!ENTITY % svg.attr.height 'height CDATA #REQUIRED'>
-<!ENTITY % svg.attrs '%svg.attr.width; %svg.attr.height; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % svg.attrs '%svg.attr.width; %svg.attr.height; %abstract.perc.attrs;'>
 <!ELEMENT svg %svg.container;>
 <!ATTLIST svg xmlns CDATA #FIXED 'http://www.w3.org/2000/svg' %svg.attrs;>
-<!ENTITY % g.container '(%abstract.container.group;)'>
-<!ENTITY % g.attrs '%abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
-<!ELEMENT g %g.container;>
-<!ATTLIST g %g.attrs;>
 <!ENTITY % line.container '%abstract.container.animation;'>
 <!ENTITY % line.attr.x1 'x1 CDATA #IMPLIED'>
 <!ENTITY % line.attr.y1 'y1 CDATA #IMPLIED'>
 <!ENTITY % line.attr.x2 'x2 CDATA #IMPLIED'>
 <!ENTITY % line.attr.y2 'y2 CDATA #IMPLIED'>
-<!ENTITY % line.attrs '%line.attr.x1; %line.attr.y1; %line.attr.x2; %line.attr.y2; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % line.attrs '%line.attr.x1; %line.attr.y1; %line.attr.x2; %line.attr.y2; %abstract.perc.attrs;'>
 <!ELEMENT line %line.container;>
 <!ATTLIST line %line.attrs;>
 <!ENTITY % polyline.container '%abstract.container.animation;'>
 <!ENTITY % polyline.attr.points 'points CDATA #REQUIRED'>
-<!ENTITY % polyline.attrs '%polyline.attr.points; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % polyline.attrs '%polyline.attr.points; %abstract.perc.attrs;'>
 <!ELEMENT polyline %polyline.container;>
 <!ATTLIST polyline %polyline.attrs;>
 <!ENTITY % polygon.container '%abstract.container.animation;'>
 <!ENTITY % polygon.attr.points 'points CDATA #REQUIRED'>
-<!ENTITY % polygon.attrs '%polygon.attr.points; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % polygon.attrs '%polygon.attr.points; %abstract.perc.attrs;'>
 <!ELEMENT polygon %polygon.container;>
 <!ATTLIST polygon %polygon.attrs;>
 <!ENTITY % path.container '%abstract.container.animation;'>
 <!ENTITY % path.attr.d 'd CDATA #REQUIRED'>
-<!ENTITY % path.attrs '%path.attr.d; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % path.attrs '%path.attr.d; %abstract.perc.attrs;'>
 <!ELEMENT path %path.container;>
 <!ATTLIST path %path.attrs;>
 <!ENTITY % rect.container '%abstract.container.animation;'>
 <!ENTITY % rect.attr.width 'width CDATA #REQUIRED'>
 <!ENTITY % rect.attr.height 'height CDATA #REQUIRED'>
-<!ENTITY % rect.attrs '%rect.attr.width; %rect.attr.height; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % rect.attrs '%rect.attr.width; %rect.attr.height; %abstract.perc.attrs;'>
 <!ELEMENT rect %rect.container;>
 <!ATTLIST rect %rect.attrs;>
 <!ENTITY % circle.container '%abstract.container.animation;'>
 <!ENTITY % circle.attr.cx 'cx CDATA #IMPLIED'>
 <!ENTITY % circle.attr.cy 'cy CDATA #IMPLIED'>
 <!ENTITY % circle.attr.r 'r CDATA #IMPLIED'>
-<!ENTITY % circle.attrs '%circle.attr.cx; %circle.attr.cy; %circle.attr.r; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % circle.attrs '%circle.attr.cx; %circle.attr.cy; %circle.attr.r; %abstract.perc.attrs;'>
 <!ELEMENT circle %circle.container;>
 <!ATTLIST circle %circle.attrs;>
 <!ENTITY % ellipse.container '%abstract.container.animation;'>
@@ -126,6 +125,6 @@
 <!ENTITY % ellipse.attr.cy 'cy CDATA #IMPLIED'>
 <!ENTITY % ellipse.attr.rx 'rx CDATA #IMPLIED'>
 <!ENTITY % ellipse.attr.ry 'ry CDATA #IMPLIED'>
-<!ENTITY % ellipse.attrs '%ellipse.attr.cx; %ellipse.attr.cy; %ellipse.attr.rx; %ellipse.attr.ry; %abstract.global.attrs; %abstract.drawable.attrs; %abstract.event-handler.attrs;'>
+<!ENTITY % ellipse.attrs '%ellipse.attr.cx; %ellipse.attr.cy; %ellipse.attr.rx; %ellipse.attr.ry; %abstract.perc.attrs;'>
 <!ELEMENT ellipse %ellipse.container;>
 <!ATTLIST ellipse %ellipse.attrs;>
